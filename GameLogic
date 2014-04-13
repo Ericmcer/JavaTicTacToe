@@ -1,0 +1,123 @@
+package TicTacToeGame;
+
+public class GameLogic {
+
+	int [] spaces = {0,0,0,0,0,0,0,0,0};
+	int spacesTaken = 0;
+	public GameLogic() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public boolean isAvailable(int i){
+		if(spaces[i]==0 && spacesTaken < 9){
+			return true;
+		}
+		else 
+			return false;
+		
+	}
+	
+	public void newGame(){
+		for(int i = 0; i < 9;i++){
+			spaces[i] = 0;
+			
+		}
+		spacesTaken = 0;
+	}
+	
+	public void addSquare(int i){
+		spaces[i] = 1;
+		spacesTaken++;
+	}
+	public boolean checkDraw(){
+		if(spacesTaken == 9){
+			return true;
+		}
+		else
+			return false;
+	}
+	public boolean checkWin(int play){
+		if(spacesTaken < 5){
+			return false;
+		}
+		if(spaces[0] == play){
+			if(spaces[1]==play && spaces[2]==play){
+				return true;
+			}
+			if(spaces[3]==play && spaces[6] == play){
+				return true;
+			}
+					
+		}
+		if(spaces[1]==play){
+			if(spaces[4]==play && spaces[7] == play){
+				return true;
+			}
+					
+		}
+		if(spaces[2] == play){
+			if(spaces[5] == play && spaces[8] == play){
+				return true;
+			}
+				
+		}
+		if(spaces[3] == play){
+			if(spaces[4] ==  play && spaces[5] == play){
+				return true;
+			}
+		}
+		if(spaces[4] == play){
+			if(spaces[0]==play && spaces[8]==play){
+				return true;
+			}
+			if(spaces[6]==play && spaces[2]==play){
+				return true;
+			}
+		}
+		if(spaces[6] == play){
+			if(spaces[7]==play && spaces[8]==play){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	
+	public int computerTurn(){
+		if(isAvailable(4)){
+			spaces[4] = 2;
+			spacesTaken++;
+			return 4;
+		}
+		for(int i = 0; i < 9; i++){
+			if(i<8 && spaces[i] == 1 && isAvailable(i+1)){
+				spaces[i+1] = 2;
+				spacesTaken++;
+				return i+1;
+			}
+		}
+		if(spaces[4] == 1 && isAvailable(5)){
+			spaces[5] = 2;
+			spacesTaken++;
+			return 5;
+		}
+		else{
+			for(int i = 0; i < 9; i++){
+				if(isAvailable(i)){
+					spaces[i]=2;
+					spacesTaken++;
+					return i;
+				}
+			}
+		}
+		return 0;
+	}
+
+	public void print(){
+		System.out.println(spaces[0]);
+		for(int i = 1;i<9;i++){
+			System.out.print(spaces[i]);
+
+		}
+	}
+	
