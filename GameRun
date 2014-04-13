@@ -1,0 +1,38 @@
+package TicTacToeGame;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+public class GameRun extends JFrame {
+
+	public GameRun() {
+	
+	JPanel panel = new JPanel();
+	GameBoard board = new GameBoard(panel);
+	add(panel);
+	
+	
+	
+	
+	setTitle("Tic Tac Toe");
+	setSize(550,550);
+	setLocationRelativeTo(null);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
+}
+	
+	public static void main(String[] argv){
+	SwingUtilities.invokeLater(new Runnable(){
+		public void run(){
+			GameRun runs = new GameRun();
+			
+			runs.setVisible(true);
+		}
+	});
+	}
+
+}
