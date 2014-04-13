@@ -1,0 +1,212 @@
+package TicTacToeGame;
+
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+
+public class GameBoard extends JPanel implements ActionListener{
+
+	private JButton[] Board = new JButton[9];
+	private GameLogic logic = new GameLogic();
+	private int gameCounter = 0;
+	
+	//Unfortunately i could not find a better way to do this then manually entering each button
+	//I was gonna do a for loop but my i counter variable couldnt enter the actionlistener class
+	//of each button so I had to do each button manually making it 9X longer than I thought it would be
+	public GameBoard(JPanel a) {
+		a.setLayout(null);
+		
+		//add in an exit button
+		JButton exit = new JButton("Exit");
+		exit.setBounds(150,400,100,70);
+		exit.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+			
+		});
+		a.add(exit);
+		
+		//add in a new game button
+		JButton reset = new JButton("New Game");
+		reset.setBounds(300,400,100,70);
+		reset.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				resetGame();
+			}
+			
+		});
+		a.add(reset);
+		
+		
+		//for loop to initialize and give actions to buttons
+		for(int i = 0;i<9;i++){
+			if(i==0){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(0);
+					}
+				});
+			a.add(Board[i]);	
+			}
+			if(i==1){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(1);
+					}
+				});
+			a.add(Board[i]);	
+			}
+			if(i==2){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(2);
+					}
+				});
+			a.add(Board[i]);
+			}
+			if(i==3){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(3);
+					}
+				});
+			a.add(Board[i]);
+			}
+			if(i==4){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(4);
+					}
+				});
+			a.add(Board[i]);
+			}
+			if(i==5){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(5);
+					}
+				});
+			a.add(Board[i]);
+			}
+			if(i==6){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(6);
+					}
+				});
+			a.add(Board[i]);
+			}
+			if(i==7){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(7);
+					}
+				});
+			a.add(Board[i]);
+			}
+			if(i==8){
+				Board[i] = new JButton("-");
+				Board[i].setBounds(135+((i%3)*95),75+(i/3*95),85,85);
+				Board[i].addActionListener(new ActionListener(){
+
+				@Override
+					public void actionPerformed(ActionEvent e) {
+					ButtonAction(8);
+					}
+				});
+			a.add(Board[i]);
+			}
+		}
+	}
+
+	
+	
+	public void ButtonAction(int i){
+		
+		if(logic.isAvailable(i)){
+			logic.addSquare(i);
+		
+			Board[i].setText("X");
+			if(logic.checkWin(1)){
+				JOptionPane.showMessageDialog(null, "You win!","Message", JOptionPane.ERROR_MESSAGE);
+			}
+			else{
+			Board[(logic.computerTurn())].setText("O");
+			if(logic.checkWin(2)){
+				JOptionPane.showMessageDialog(null, "computer wins","Message", JOptionPane.ERROR_MESSAGE);
+			}
+			if(logic.checkDraw()){
+				JOptionPane.showMessageDialog(null, "Draw!","Message", JOptionPane.ERROR_MESSAGE);
+			}
+			
+			}
+		}
+	}
+
+	
+	private void resetGame(){
+		for(int i = 0;i<9;i++){
+			Board[i].setText("-");
+			logic.newGame();
+		}
+		gameCounter++;
+		if(gameCounter % 2 == 1){
+			Board[(logic.computerTurn())].setText("O");
+		}
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+}
+	
+
+
